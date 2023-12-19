@@ -40,8 +40,6 @@ public class CustomCalendar {
             ObjectInputStream ois = new ObjectInputStream(fis);
             events = (ArrayList<Event>) ois.readObject();
             ois.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e);
         }

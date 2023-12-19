@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -78,6 +79,7 @@ public class UserInterface {
         // Text field for event input
         TextField eventTextField = new TextField();
         eventTextField.setPromptText("Add Event");
+
 
         // Button for adding event
         Button addEventBtn = new Button("Add Event");
