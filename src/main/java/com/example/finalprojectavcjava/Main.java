@@ -40,7 +40,7 @@ public class Main extends Application {
         // Om användaren är inloggad
         if (loggedIn) {
             // Sätter titeln på huvudfönstret
-            primaryStage.setTitle("Calendar");
+            primaryStage.setTitle("Veckokalender");
 
             // Hämtar användarens ID från inloggningssidan
             String userID = loginPage.getUserID();
@@ -96,9 +96,9 @@ public class Main extends Application {
     // Metoden för att visa uppmaningsruta vid inloggning
     private void showLoginPrompt() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login Required");
-        alert.setHeaderText("You need to log in to access the calendar");
-        alert.setContentText("Please log in to continue.");
+        alert.setTitle("Inloggning krävs");
+        alert.setHeaderText("Du måste logga in för att få tillgång till kalendern");
+        alert.setContentText("Logga in för att fortsätta");
 
         alert.showAndWait();
     }
@@ -106,9 +106,9 @@ public class Main extends Application {
     // Metoden för att visa uppmaningsruta vid utloggning
     private void showLogoutPrompt() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Logout Successful");
-        alert.setHeaderText("You have been successfully logged out");
-        alert.setContentText("Thank you for using the calendar application.");
+        alert.setTitle("Lyckad utloggning");
+        alert.setHeaderText("Du har loggats ut");
+        alert.setContentText("Tack för att du använder veckokalendern!");
 
         alert.showAndWait();
     }

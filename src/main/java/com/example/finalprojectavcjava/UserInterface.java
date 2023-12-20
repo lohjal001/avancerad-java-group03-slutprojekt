@@ -38,8 +38,8 @@ public class UserInterface {
     UserInterface(CustomCalendar calendar) {
 
         // Skapar en rubrik för kalendern
-        Text calendarTitle = new Text("Calendar of " + calendar.getYear());
-        calendarTitle.setFont(Font.font("Segone UI", 22));
+        Text calendarTitle = new Text("Kalender " + calendar.getYear());
+        calendarTitle.setFont(Font.font("Roboto UI", 27));
 
         // Skapar en HBox för rubriken och centrerar den
         header = new HBox(calendarTitle);
@@ -86,23 +86,23 @@ public class UserInterface {
         Button prevWeekBtn = new Button("<");
         prevWeekBtn.setOnAction(e -> {
             currentWeek.setText("V. " + calendar.prevWeek());
-            calendarTitle.setText("Calendar of " + calendar.getYear());
+            calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
         });
 
         Button nextWeekBtn = new Button(">");
         nextWeekBtn.setOnAction(e -> {
             currentWeek.setText("V. " + calendar.nextWeek());
-            calendarTitle.setText("Calendar of " + calendar.getYear());
+            calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
         });
 
         // Textfält för att ange evenemangstext
         TextField eventTextField = new TextField();
-        eventTextField.setPromptText("Add Event");
+        eventTextField.setPromptText("Ny händelse");
 
         // Knapp för att lägga till evenemang
-        Button addEventBtn = new Button("Add Event");
+        Button addEventBtn = new Button("Ny händelse");
         addEventBtn.setOnAction(event -> {
             String eventText = eventTextField.getText();
             if (!eventText.isEmpty()) {

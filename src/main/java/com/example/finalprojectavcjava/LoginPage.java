@@ -34,20 +34,20 @@ public class LoginPage extends Stage {
 
         // Skapar ett nytt scenobjekt och konfigurerar layouten med ett rutnät
         stage = new Stage();
-        stage.setTitle("Login");
+        stage.setTitle("Logga in");
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
         // Skapar och konfigurerar användargränssnittselement
-        userIDLabel = new Label("userID:");
-        userPasswordLabel = new Label("password:");
+        userIDLabel = new Label("Användarnamn:");
+        userPasswordLabel = new Label("Lösenord:");
         messageLabel = new Label();
 
         userIDField = new TextField();
         userPasswordField = new PasswordField();
 
-        Button loginButton = new Button("Login");
+        Button loginButton = new Button("Logga in");
         Button resetButton = new Button("Reset");
 
         // Anger åtgärder för knapparna när de klickas
@@ -118,7 +118,7 @@ public class LoginPage extends Stage {
             if (logininfo.get(userID).equals(password)) {
                 // Visa meddelande om lyckad inloggning
                 messageLabel.setTextFill(Color.GREEN);
-                messageLabel.setText("Login successful");
+                messageLabel.setText("Lyckad inloggning!");
 
                 // Sätt variabeln loginSuccess till true
                 loginSuccess = true;
@@ -130,12 +130,12 @@ public class LoginPage extends Stage {
             } else {
                 // Visa meddelande om felaktigt lösenord
                 messageLabel.setTextFill(Color.RED);
-                messageLabel.setText("Wrong password");
+                messageLabel.setText("Felaktigt lösenord");
             }
         } else {
             // Visa meddelande om användarnamn inte hittas
             messageLabel.setTextFill(Color.RED);
-            messageLabel.setText("Username not found");
+            messageLabel.setText("Kan ej hitta användare");
         }
     }
 
