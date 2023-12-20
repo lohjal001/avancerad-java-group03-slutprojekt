@@ -22,6 +22,7 @@ public class BottomBox extends HBox {
         weatherTextLabel.setText(weatherDescription + temp);
         weatherTextLabel.setFont(Font.font("Segone UI", 20));
 
+
         // Laddar en väderikon från OpenWeatherMap API baserat på ikonID
         Image iconImage = new Image("http://openweathermap.org/img/wn/" + iconID + ".png");
         ImageView weatherImageView = new ImageView();

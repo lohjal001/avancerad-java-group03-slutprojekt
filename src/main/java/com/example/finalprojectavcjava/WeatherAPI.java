@@ -69,9 +69,11 @@ public class WeatherAPI {
 
             //tar fram temperaturen som en double
             double temp = mainObject.getDouble("temp", Double.NaN);
+            System.out.println(temp);
 
             //tar fram beskrivningen av vädret som en string
             String weatherDescription = jo2.getString("description", "missing");
+            System.out.println(weatherDescription);
 
             //plockar fram ID till en image som symboliserar vädret för att hämta bilden med hjälp av URL
             iconID = jo2.getString("icon", "missing");

@@ -68,7 +68,7 @@ public class UserInterface {
         body = new BorderPane();
         scrollBody = new ScrollPane(body);
         scrollBody.setFitToWidth(true);
-        scrollBody.setStyle("-fx-background-color: ddd;");
+        scrollBody.setStyle("-fx-background-color: FFBB5C;");
 
         // Sätter in padding för BorderPane
         body.setPadding(new Insets(5, 0, 5, 0));
