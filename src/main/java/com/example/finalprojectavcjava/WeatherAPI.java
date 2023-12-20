@@ -79,6 +79,8 @@ public class WeatherAPI {
             //URL för att hämta bilden som symboliserar vädret
             String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
 
+
+
         } catch (ProtocolException ex) {
             throw new RuntimeException(ex);
         } catch (MalformedURLException ex) {

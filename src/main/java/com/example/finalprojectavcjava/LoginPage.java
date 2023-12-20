@@ -47,6 +47,8 @@ public class LoginPage extends Stage {
 
         Button loginButton = new Button("Login");
         Button resetButton = new Button("Reset");
+        loginButton.setStyle("-fx-background-color: #67729D; -fx-text-fill: #FFF");
+        resetButton.setStyle("-fx-background-color: #67729D; -fx-text-fill: #FFF");
 
         // Anger åtgärder för knapparna när de klickas
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -82,6 +84,7 @@ public class LoginPage extends Stage {
 
         gridPane.add(buttonBox, 1, 2);
         gridPane.add(messageLabel, 1, 3);
+        gridPane.setStyle("-fx-background-color: CEDEBD; -fx-text-fill: #FFF");
 
         // Lägg till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
         userIDField.setOnKeyPressed(new EventHandler<KeyEvent>() {

@@ -55,12 +55,14 @@ public class UserInterface {
 
         // Skapar en rubrik för kalendern
         Text calendarTitle = new Text("Kalender " + calendar.getYear());
-        calendarTitle.setFont(Font.font("Roboto UI", 27));
+        calendarTitle.setFont(Font.font("DejaVu Sans", 27));
+        calendarTitle.setStyle("-fx-background-color: F1EAFF; -fx-text-fill: 392467");
 
         // Skapar en HBox för rubriken och centrerar den
         header = new HBox(calendarTitle);
         header.setAlignment(Pos.CENTER);
         header.setPadding(new Insets(10, 10, 10, 10));
+        header.setStyle("-fx-background-color: FDF7E4;");
 
         // Skapar en BorderPane för hela gränssnittet och en ScrollPane för möjliggöra scrollande
         body = new BorderPane();
@@ -70,6 +72,7 @@ public class UserInterface {
 
         // Sätter in padding för BorderPane
         body.setPadding(new Insets(5, 0, 5, 0));
+        body.setStyle("-fx-background-color: FDF7E4;");
 
         // Lägger till rubriken överst i BorderPane
         body.setTop(header);
@@ -80,6 +83,8 @@ public class UserInterface {
         main.setVgap(10);
         main.setHgap(10);
         main.setPrefWrapLength(170);
+        body.setStyle("-fx-background-color: FDF7E4;");
+
 
         // Renderar dagarna baserat på den aktuella kalendern
         renderDays(calendar);
@@ -104,6 +109,8 @@ public class UserInterface {
             currentWeek.setText("V. " + calendar.prevWeek());
             calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
+            calendarTitle.setFont(Font.font("DejaVu Sans", 35));
+            currentWeek.setFont(Font.font("DejaVu Sans", 22));
         });
 
         Button nextWeekBtn = new Button(">");
@@ -111,6 +118,8 @@ public class UserInterface {
             currentWeek.setText("V. " + calendar.nextWeek());
             calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
+            calendarTitle.setFont(Font.font("DejaVu Sans", 35));
+            currentWeek.setFont(Font.font("DejaVu Sans", 22));
 
         });
 
