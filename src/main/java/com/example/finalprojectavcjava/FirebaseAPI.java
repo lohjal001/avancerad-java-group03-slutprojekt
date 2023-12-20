@@ -1,5 +1,5 @@
-/*package com.example.finalprojectavcjava;
-
+package com.example.finalprojectavcjava;
+/*
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;

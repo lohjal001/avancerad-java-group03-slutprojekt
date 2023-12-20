@@ -35,19 +35,25 @@ public class HolidayAPI {
                 response.append(line);
             }
 
+
             JsonObject holidaysOne = Json.parse(response.toString()).asObject();
 
 
-
+            //stoppar in alla helgdagar i en array
             JsonArray holidaysArray = holidaysOne.get("holidays").asArray();
             System.out.println(holidaysArray);
 
+            // TODO: 2023-12-20 stoppa in if-sats som kollar om kalenderns datum matchar datum i arrayen? (kanske inte här?)
+
+            //plockar ut första helgdagen
             JsonObject holidaysString = holidaysArray.get(0).asObject();
             System.out.println(holidaysString);
 
+            //tar ut namn på helgdagen
             String holidayName = holidaysString.getString("name", "missing");
             System.out.println(holidayName);
 
+            //tar ut datum på helgdagen
             String holidayDate= holidaysString.getString("date", "missing");
             System.out.println(holidayDate);
 
