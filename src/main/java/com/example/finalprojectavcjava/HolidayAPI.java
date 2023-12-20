@@ -58,8 +58,6 @@ public class HolidayAPI {
             System.out.println(holidayDate);
 
 
-
-
             reader.close();
             connection.disconnect();
 

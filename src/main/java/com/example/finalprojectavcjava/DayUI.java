@@ -1,7 +1,5 @@
 package com.example.finalprojectavcjava;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,8 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import java.time.DayOfWeek;
 import java.util.List;
 
 public class DayUI {

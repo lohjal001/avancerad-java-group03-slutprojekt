@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+
 public class Main extends Application {
 
     // Metoden som startar projektet
@@ -18,12 +20,17 @@ public class Main extends Application {
     @Override
     // Metoden som körs vid start av projektet
     public void start(Stage primaryStage) {
+        openLoginDialog(primaryStage);
+    }
+
+    // Metoden för att öppna inloggningsdialogen
+    private void openLoginDialog(Stage primaryStage) {
         // Skapar och hämtar IDandPasswords-objektet
         IDandPasswords idandPasswords = new IDandPasswords();
-        idandPasswords.getLoginInfo();
+        HashMap<String, String> loginInfo = idandPasswords.getLoginInfo();
 
         // Skapar LoginPage-objekt med IDandPasswords-informationen
-        LoginPage loginPage = new LoginPage(idandPasswords.getLoginInfo());
+        LoginPage loginPage = new LoginPage(loginInfo);
 
         // Visar inloggningsdialogen och kontrollerar om användaren är inloggad
         boolean loggedIn = loginPage.showLoginDialog();
@@ -75,14 +82,17 @@ public class Main extends Application {
         } else {
             // Om användaren inte är inloggad, visa en uppmaningsruta
             showLoginPrompt();
-            primaryStage.close(); // Stäng fönstret om användaren inte är inloggad
+            // Öppna inloggningsdialogen igen efter uppmaningen
+            openLoginDialog(primaryStage);
         }
     }
 
     // Metoden för att hantera logik vid utloggning
     private void handleLogout(Stage primaryStage) {
         showLogoutPrompt();
+        // Stäng fönstret och öppna inloggningsdialogen igen
         primaryStage.close();
+        openLoginDialog(primaryStage);
     }
 
     // Metoden för att visa uppmaningsruta
@@ -94,6 +104,7 @@ public class Main extends Application {
 
         alert.showAndWait();
     }
+
     // Metoden för att visa uppmaningsruta vid utloggning
     private void showLogoutPrompt() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

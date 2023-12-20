@@ -10,13 +10,8 @@ public class IDandPasswords {
     // Konstruktorn för att lägga till användarnamn och lösenord i Hashmappen
     IDandPasswords() {
         logininfo.put("Username", "Password");
-<<<<<<< Updated upstream
-        logininfo.put("UserTwo", "Password");
-        logininfo.put("Username", "Password");
-=======
         logininfo.put("Lovisa", "123");
         logininfo.put("Alex", "123");
->>>>>>> Stashed changes
     }
 
     // Metoden för att hämta hela Hashmappen med användarnamn och lösenord
@@ -24,6 +19,4 @@ public class IDandPasswords {
         return logininfo;
     }
 
-    public void clearLoginInfo() {
-    }
 }

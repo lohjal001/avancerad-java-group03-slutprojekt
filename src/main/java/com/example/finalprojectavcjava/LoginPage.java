@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 
-public class LoginPage extends Node {
+public class LoginPage extends Stage {
 
     private Stage stage;
     private TextField userIDField;
@@ -25,6 +24,7 @@ public class LoginPage extends Node {
     private Label userPasswordLabel;
     private Label messageLabel;
     private HashMap<String, String> logininfo;
+    private boolean loginSuccess; // New variable to track login status
 
     // Konstruktorn för LoginPage
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
@@ -33,7 +33,6 @@ public class LoginPage extends Node {
         // Skapar en ny scen med ett rutnätslayout
         stage = new Stage();
         stage.setTitle("Login");
-
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
@@ -119,6 +118,9 @@ public class LoginPage extends Node {
                 messageLabel.setTextFill(Color.GREEN);
                 messageLabel.setText("Login successful");
 
+                // Set the loginSuccess variable to true
+                loginSuccess = true;
+
                 // Stänger login-fönstret
                 Platform.runLater(() -> {
                     stage.close();
@@ -137,10 +139,11 @@ public class LoginPage extends Node {
 
     // Visar inloggningsdialogen och väntar på dess stängning
     public boolean showLoginDialog() {
+        // Show the login dialog and wait for its closure
         stage.showAndWait();
 
-        // Returnerar sant när inloggningen är klar
-        return true;
+        // Check if the login was successful
+        return loginSuccess;
     }
 
     // Hämtar användar-ID från inloggningsdialogen
