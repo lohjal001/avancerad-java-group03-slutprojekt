@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+import static com.example.finalprojectavcjava.HolidayAPI.holidaysArray;
 
 public class UserInterface {
 
@@ -27,11 +30,24 @@ public class UserInterface {
     // Ritar ut dagarna i veckan baserat på kalendern
     void renderDays(CustomCalendar calendar) {
         main.getChildren().clear();
+
         for (int i = 1; i <= 7; i++) {
             // Skapar DayUI-objekt för varje dag och lägger till dem i FlowPane
             DayUI dayui = new DayUI(calendar.getDayOfWeek(i), calendar);
             main.getChildren().add(dayui.stack);
+
+            for (JsonValue jv: holidaysArray) {
+                JsonObject jo = jv.asObject();
+                String redDate = jo.getString("date", "missing");
+                if (redDate.equals(dayui.dateString)) {
+                    dayui.setTitle(jo.getString("name", "missing"));
+
+                }
+
+            }
         }
+
+
     }
 
     // Konstruktorn för UserInterface

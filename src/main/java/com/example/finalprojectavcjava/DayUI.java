@@ -58,8 +58,8 @@ public class DayUI {
         dayBox.maxWidth(200);
         dayBox.setPadding(new Insets(10, 5, 10, 5));
 
+        //skapar en String med dagarnas datum för att jämföra mot API array
         dateString= currentDate.date.getYear()-1+ DateTimeFormatter.ofPattern("-MM-dd").format(currentDate.date);
-        System.out.println(dateString);
 
         // Uppdaterar bakgrundsfärg beroende på om det är dagens datum
         if (currentDate.isToday()) {
@@ -83,6 +83,7 @@ public class DayUI {
         Text title = new Text();
         title.setText(currentDate.weekday);
         title.setFont(Font.font("Segone UI", 22));
+
 
         Text subtitle = new Text();
         subtitle.setText(currentDate.dayAndMonth);
