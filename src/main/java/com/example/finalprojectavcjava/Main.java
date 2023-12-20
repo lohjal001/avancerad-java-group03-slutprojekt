@@ -8,9 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import static com.example.finalprojectavcjava.HolidayAPI.holidays;
-import static com.example.finalprojectavcjava.WeatherAPI.weather;
-
 public class Main extends Application {
 
     // Metoden som startar projektet
@@ -21,9 +18,6 @@ public class Main extends Application {
     @Override
     // Metoden som körs vid start av projektet
     public void start(Stage primaryStage) {
-        weather();
-        holidays();
-
         // Skapar och hämtar IDandPasswords-objektet
         IDandPasswords idandPasswords = new IDandPasswords();
         idandPasswords.getLoginInfo();

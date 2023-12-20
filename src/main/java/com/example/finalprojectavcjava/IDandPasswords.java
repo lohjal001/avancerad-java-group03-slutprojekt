@@ -10,10 +10,6 @@ public class IDandPasswords {
     // Konstruktorn för att lägga till användarnamn och lösenord i Hashmappen
     IDandPasswords() {
         logininfo.put("Username", "Password");
-
-        logininfo.put("UserTwo", "Password");
-        logininfo.put("Username", "Password");
-
         logininfo.put("Lovisa", "123");
         logininfo.put("Alex", "123");
     }
@@ -23,6 +19,4 @@ public class IDandPasswords {
         return logininfo;
     }
 
-    public void clearLoginInfo() {
-    }
 }

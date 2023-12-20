@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -16,8 +15,10 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 
-public class LoginPage extends Node {
+// LoginPage är en subklass av Stage, vilket gör den till ett fönster i JavaFX
+public class LoginPage extends Stage {
 
+    // Instansvariabler för att hantera användargränssnittselement
     private Stage stage;
     private TextField userIDField;
     private PasswordField userPasswordField;
@@ -25,15 +26,15 @@ public class LoginPage extends Node {
     private Label userPasswordLabel;
     private Label messageLabel;
     private HashMap<String, String> logininfo;
+    private boolean loginSuccess;
 
     // Konstruktorn för LoginPage
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
         logininfo = loginInfoOriginal;
 
-        // Skapar en ny scen med ett rutnätslayout
+        // Skapar ett nytt scenobjekt och konfigurerar layouten med ett rutnät
         stage = new Stage();
         stage.setTitle("Login");
-
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
@@ -65,7 +66,7 @@ public class LoginPage extends Node {
             }
         });
 
-        // Lägger till element i rutnätet och sätter marginaler
+        // Lägger till element i rutnätet
         GridPane.setMargin(userIDLabel, new Insets(0, 0, 0, 10));
         GridPane.setMargin(userPasswordLabel, new Insets(0, 0, 0, 10));
         GridPane.setMargin(userIDField, new Insets(0, 0, 0, 10));
@@ -76,7 +77,7 @@ public class LoginPage extends Node {
         gridPane.add(userIDField, 1, 0);
         gridPane.add(userPasswordField, 1, 1);
 
-        // Lägger till knapparna i en HBox och sätter marginaler
+        // Lägger till knapparna i en HBox
         HBox buttonBox = new HBox(5);
         buttonBox.getChildren().addAll(loginButton, resetButton);
         GridPane.setMargin(buttonBox, new Insets(0, 0, 0, 10));
@@ -84,7 +85,7 @@ public class LoginPage extends Node {
         gridPane.add(buttonBox, 1, 2);
         gridPane.add(messageLabel, 1, 3);
 
-        // Lägg till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
+        // Lägger till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
         userIDField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -103,7 +104,7 @@ public class LoginPage extends Node {
             }
         });
 
-        // Skapar en scen
+        // Skapar en scen med rutnätet och sätter storlek
         Scene scene = new Scene(gridPane, 400, 200);
         stage.setScene(scene);
     }
@@ -119,17 +120,20 @@ public class LoginPage extends Node {
                 messageLabel.setTextFill(Color.GREEN);
                 messageLabel.setText("Login successful");
 
-                // Stänger login-fönstret
+                // Sätt variabeln loginSuccess till true
+                loginSuccess = true;
+
+                // Stäng login-fönstret
                 Platform.runLater(() -> {
                     stage.close();
                 });
             } else {
-                // Visar meddelande om felaktigt lösenord
+                // Visa meddelande om felaktigt lösenord
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText("Wrong password");
             }
         } else {
-            // Visar meddelande om användarnamn inte hittas
+            // Visa meddelande om användarnamn inte hittas
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText("Username not found");
         }
@@ -137,13 +141,14 @@ public class LoginPage extends Node {
 
     // Visar inloggningsdialogen och väntar på dess stängning
     public boolean showLoginDialog() {
+        // Visa inloggningsdialogen och vänta på dess stängning
         stage.showAndWait();
 
-        // Returnerar sant när inloggningen är klar
-        return true;
+        // Kontrollerar om inloggningen var framgångsrik
+        return loginSuccess;
     }
 
-    // Hämtar användar-ID från inloggningsdialogen
+    // Hämtar användar-ID från inloggningsdialog
     public String getUserID() {
         return userIDField.getText();
     }
