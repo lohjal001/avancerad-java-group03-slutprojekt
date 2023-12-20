@@ -1,101 +1,78 @@
 package com.example.finalprojectavcjava;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
+import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
 
 public class Main extends Application {
 
-    // Metoden som startar projektet
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    // Metoden som körs vid start av projektet
     public void start(Stage primaryStage) {
         openLoginDialog(primaryStage);
     }
 
-    // Metoden för att öppna inloggningsdialogen
     private void openLoginDialog(Stage primaryStage) {
-        // Skapar och hämtar IDandPasswords-objektet
         IDandPasswords idandPasswords = new IDandPasswords();
         HashMap<String, String> loginInfo = idandPasswords.getLoginInfo();
 
-        // Skapar LoginPage-objekt med IDandPasswords-informationen
         LoginPage loginPage = new LoginPage(loginInfo);
-
-        // Visar inloggningsdialogen och kontrollerar om användaren är inloggad
         boolean loggedIn = loginPage.showLoginDialog();
 
         if (loggedIn) {
-            // Om inloggning lyckas, skapa huvudfönstret och kalenderobjekt
             primaryStage.setTitle("Calendar");
-
             String userID = loginPage.getUserID();
             CustomCalendar calendar = new CustomCalendar(userID);
 
-            // Skapar UserInterface-objekt med kalenderobjektet
             UserInterface UI = new UserInterface(calendar);
-
-            // Skapar en knapp för att logga ut
             Button logoutButton = new Button("Sign out");
             logoutButton.setOnAction(e -> handleLogout(primaryStage));
 
-            // Skapar en BorderPane för att organisera layouten
             BorderPane layout = new BorderPane();
-
-            // Centrera huvudinnehållet (scrollBody från UI-objektet)
             layout.setCenter(UI.scrollBody);
-
-            // Placera logga ut-knappen i övre högra hörnet och justera marginalerna
             BorderPane.setAlignment(logoutButton, javafx.geometry.Pos.TOP_RIGHT);
-            BorderPane.setMargin(logoutButton, new Insets(10, 10, 10, 10)); // Justera dessa värden efter önskat indrag
+            BorderPane.setMargin(logoutButton, new javafx.geometry.Insets(10, 10, 10, 10));
 
-            // Lägg till logga ut-knappen högst upp i BorderPane
             layout.setTop(logoutButton);
 
-            // Skapa en instans av BottomBox
             BottomBox bottomBox = new BottomBox();
-
-            // Lägg till BottomBox i din layout (till exempel i Bottom-platsen)
             layout.setBottom(bottomBox);
 
-            // Skapa scenen med layouten och storleken
-            Scene scene = new Scene(layout, 1500, 620);
+            // Hämta den primära skärmen
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
 
-            // Sätt scenen för primaryStage och definiera vad som ska hända vid stängning
+            // Sätt storleken på scenen baserat på skärmens storlek
+            Scene scene = new Scene(layout, bounds.getWidth(), bounds.getHeight());
+
+            // Sätt storleken på huvudfönstret
             primaryStage.setScene(scene);
-            primaryStage.setOnCloseRequest(e -> {
-                // Eventuell logik som ska köras vid stängning
-            });
 
             // Visa huvudfönstret
             primaryStage.show();
         } else {
-            // Om användaren inte är inloggad, visa en uppmaningsruta
             showLoginPrompt();
-            // Öppna inloggningsdialogen igen efter uppmaningen
             openLoginDialog(primaryStage);
         }
     }
 
-    // Metoden för att hantera logik vid utloggning
     private void handleLogout(Stage primaryStage) {
         showLogoutPrompt();
-        // Stäng fönstret och öppna inloggningsdialogen igen
         primaryStage.close();
         openLoginDialog(primaryStage);
     }
 
-    // Metoden för att visa uppmaningsruta
     private void showLoginPrompt() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Login Required");
@@ -105,7 +82,6 @@ public class Main extends Application {
         alert.showAndWait();
     }
 
-    // Metoden för att visa uppmaningsruta vid utloggning
     private void showLogoutPrompt() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Logout Successful");
