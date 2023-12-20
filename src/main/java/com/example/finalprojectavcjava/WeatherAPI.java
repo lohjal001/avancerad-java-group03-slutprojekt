@@ -17,7 +17,7 @@ import java.net.URL;
 public class WeatherAPI {
 
     private static final String API_KEY = "39a9fa293da14c18d62e493441646e01";
-    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=55.61&lon=13.00&&units=metric&lang=svappid=39a9fa293da14c18d62e493441646e01";
+    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=55.61&lon=13.00&appid=39a9fa293da14c18d62e493441646e01&units=metric";
 
     public static String iconID;
 
@@ -36,7 +36,7 @@ public class WeatherAPI {
     }
 
 
-    public void Weather(String[] args) {
+    public static void weather() {
         String city = "Malmö";
         JSONObject obj = new JSONObject();
 
@@ -58,17 +58,14 @@ public class WeatherAPI {
             connection.disconnect();
 
             JsonObject allJsonData = Json.parse(response.toString()).asObject();
-            System.out.println(allJsonData);
 
             //första väderdatan i en array
             JsonArray weatherData = allJsonData.get("weather").asArray();
-            System.out.println(weatherData);
 
             JsonObject mainObject = allJsonData.get("main").asObject();
 
             //plockar ut första objectet ur arrayen
             JsonObject jo2 = weatherData.get(0).asObject();
-            System.out.println(jo2);
 
             //tar fram temperaturen som en double
             double temp = mainObject.getDouble("temp", Double.NaN);
@@ -80,10 +77,11 @@ public class WeatherAPI {
 
             //plockar fram ID till en image som symboliserar vädret för att hämta bilden med hjälp av URL
             iconID = jo2.getString("icon", "missing");
-            System.out.println(iconID);
 
             //URL för att hämta bilden som symboliserar vädret
             String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
+
+
 
         } catch (ProtocolException ex) {
             throw new RuntimeException(ex);

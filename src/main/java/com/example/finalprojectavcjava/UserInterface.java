@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+import static com.example.finalprojectavcjava.HolidayAPI.holidaysArray;
 
 public class UserInterface {
 
@@ -27,11 +30,24 @@ public class UserInterface {
     // Ritar ut dagarna i veckan baserat på kalendern
     void renderDays(CustomCalendar calendar) {
         main.getChildren().clear();
+
         for (int i = 1; i <= 7; i++) {
             // Skapar DayUI-objekt för varje dag och lägger till dem i FlowPane
             DayUI dayui = new DayUI(calendar.getDayOfWeek(i), calendar);
             main.getChildren().add(dayui.stack);
+
+            for (JsonValue jv: holidaysArray) {
+                JsonObject jo = jv.asObject();
+                String redDate = jo.getString("date", "missing");
+                if (redDate.equals(dayui.dateString)) {
+                    dayui.setTitle(jo.getString("name", "missing"));
+
+                }
+
+            }
         }
+
+
     }
 
     // Konstruktorn för UserInterface
@@ -39,21 +55,24 @@ public class UserInterface {
 
         // Skapar en rubrik för kalendern
         Text calendarTitle = new Text("Kalender " + calendar.getYear());
-        calendarTitle.setFont(Font.font("Roboto UI", 27));
+        calendarTitle.setFont(Font.font("DejaVu Sans", 27));
+        calendarTitle.setStyle("-fx-background-color: F1EAFF; -fx-text-fill: 392467");
 
         // Skapar en HBox för rubriken och centrerar den
         header = new HBox(calendarTitle);
         header.setAlignment(Pos.CENTER);
         header.setPadding(new Insets(10, 10, 10, 10));
+        header.setStyle("-fx-background-color: FDF7E4;");
 
         // Skapar en BorderPane för hela gränssnittet och en ScrollPane för möjliggöra scrollande
         body = new BorderPane();
         scrollBody = new ScrollPane(body);
         scrollBody.setFitToWidth(true);
-        scrollBody.setStyle("-fx-background-color: ddd;");
+        scrollBody.setStyle("-fx-background-color: FFBB5C;");
 
         // Sätter in padding för BorderPane
         body.setPadding(new Insets(5, 0, 5, 0));
+        body.setStyle("-fx-background-color: FDF7E4;");
 
         // Lägger till rubriken överst i BorderPane
         body.setTop(header);
@@ -64,6 +83,8 @@ public class UserInterface {
         main.setVgap(10);
         main.setHgap(10);
         main.setPrefWrapLength(170);
+        body.setStyle("-fx-background-color: FDF7E4;");
+
 
         // Renderar dagarna baserat på den aktuella kalendern
         renderDays(calendar);
@@ -88,6 +109,8 @@ public class UserInterface {
             currentWeek.setText("V. " + calendar.prevWeek());
             calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
+            calendarTitle.setFont(Font.font("DejaVu Sans", 35));
+            currentWeek.setFont(Font.font("DejaVu Sans", 22));
         });
 
         Button nextWeekBtn = new Button(">");
@@ -95,26 +118,14 @@ public class UserInterface {
             currentWeek.setText("V. " + calendar.nextWeek());
             calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
+            calendarTitle.setFont(Font.font("DejaVu Sans", 35));
+            currentWeek.setFont(Font.font("DejaVu Sans", 22));
+
         });
 
-        // Textfält för att ange evenemangstext
-        TextField eventTextField = new TextField();
-        eventTextField.setPromptText("Ny händelse");
-
-        // Knapp för att lägga till evenemang
-        Button addEventBtn = new Button("Ny händelse");
-        addEventBtn.setOnAction(event -> {
-            String eventText = eventTextField.getText();
-            if (!eventText.isEmpty()) {
-                // Lägg till evenemang och uppdatera gränssnittet
-                calendar.addEvent(new Event(calendar.currentDate, eventText));
-                eventTextField.clear();
-                renderDays(calendar);
-            }
-        });
 
         // Lägg till navigationskomponenter i HBox
-        nav.getChildren().addAll(prevWeekBtn, currentWeek, nextWeekBtn, eventTextField, addEventBtn);
+        nav.getChildren().addAll(prevWeekBtn, currentWeek, nextWeekBtn);
 
         // Lägg till navigationskomponenterna i BorderPane
         body.setBottom(nav);
