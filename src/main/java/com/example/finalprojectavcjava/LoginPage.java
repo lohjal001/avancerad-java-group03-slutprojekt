@@ -15,8 +15,10 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 
+// LoginPage är en subklass av Stage, vilket gör den till ett fönster i JavaFX
 public class LoginPage extends Stage {
 
+    // Instansvariabler för att hantera användargränssnittselement
     private Stage stage;
     private TextField userIDField;
     private PasswordField userPasswordField;
@@ -24,31 +26,29 @@ public class LoginPage extends Stage {
     private Label userPasswordLabel;
     private Label messageLabel;
     private HashMap<String, String> logininfo;
-    private boolean loginSuccess; // New variable to track login status
+    private boolean loginSuccess;
 
     // Konstruktorn för LoginPage
     public LoginPage(HashMap<String, String> loginInfoOriginal) {
         logininfo = loginInfoOriginal;
 
-        // Skapar en ny scen med ett rutnätslayout
+        // Skapar ett nytt scenobjekt och konfigurerar layouten med ett rutnät
         stage = new Stage();
-        stage.setTitle("Login");
+        stage.setTitle("Logga in");
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
         // Skapar och konfigurerar användargränssnittselement
-        userIDLabel = new Label("userID:");
-        userPasswordLabel = new Label("password:");
+        userIDLabel = new Label("Användarnamn:");
+        userPasswordLabel = new Label("Lösenord:");
         messageLabel = new Label();
 
         userIDField = new TextField();
         userPasswordField = new PasswordField();
 
-        Button loginButton = new Button("Login");
+        Button loginButton = new Button("Logga in");
         Button resetButton = new Button("Reset");
-        loginButton.setStyle("-fx-background-color: FFBB5C; -fx-text-fill: D0C11");
-        resetButton.setStyle("-fx-background-color: FFBB5C; -fx-text-fill: D0C11");
 
         // Anger åtgärder för knapparna när de klickas
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -66,7 +66,7 @@ public class LoginPage extends Stage {
             }
         });
 
-        // Lägger till element i rutnätet och sätter marginaler
+        // Lägger till element i rutnätet
         GridPane.setMargin(userIDLabel, new Insets(0, 0, 0, 10));
         GridPane.setMargin(userPasswordLabel, new Insets(0, 0, 0, 10));
         GridPane.setMargin(userIDField, new Insets(0, 0, 0, 10));
@@ -77,16 +77,15 @@ public class LoginPage extends Stage {
         gridPane.add(userIDField, 1, 0);
         gridPane.add(userPasswordField, 1, 1);
 
-        // Lägger till knapparna i en HBox och sätter marginaler
+        // Lägger till knapparna i en HBox
         HBox buttonBox = new HBox(5);
         buttonBox.getChildren().addAll(loginButton, resetButton);
         GridPane.setMargin(buttonBox, new Insets(0, 0, 0, 10));
 
         gridPane.add(buttonBox, 1, 2);
         gridPane.add(messageLabel, 1, 3);
-        gridPane.setStyle("-fx-background-color: C63D2F; -fx-text-fill: D0C11");
 
-        // Lägg till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
+        // Lägger till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
         userIDField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -105,7 +104,7 @@ public class LoginPage extends Stage {
             }
         });
 
-        // Skapar en scen
+        // Skapar en scen med rutnätet och sätter storlek
         Scene scene = new Scene(gridPane, 400, 200);
         stage.setScene(scene);
     }
@@ -119,37 +118,37 @@ public class LoginPage extends Stage {
             if (logininfo.get(userID).equals(password)) {
                 // Visa meddelande om lyckad inloggning
                 messageLabel.setTextFill(Color.GREEN);
-                messageLabel.setText("Login successful");
+                messageLabel.setText("Lyckad inloggning!");
 
-                // Set the loginSuccess variable to true
+                // Sätt variabeln loginSuccess till true
                 loginSuccess = true;
 
-                // Stänger login-fönstret
+                // Stäng login-fönstret
                 Platform.runLater(() -> {
                     stage.close();
                 });
             } else {
-                // Visar meddelande om felaktigt lösenord
+                // Visa meddelande om felaktigt lösenord
                 messageLabel.setTextFill(Color.RED);
-                messageLabel.setText("Wrong password");
+                messageLabel.setText("Felaktigt lösenord");
             }
         } else {
-            // Visar meddelande om användarnamn inte hittas
+            // Visa meddelande om användarnamn inte hittas
             messageLabel.setTextFill(Color.RED);
-            messageLabel.setText("Username not found");
+            messageLabel.setText("Kan ej hitta användare");
         }
     }
 
     // Visar inloggningsdialogen och väntar på dess stängning
     public boolean showLoginDialog() {
-        // Show the login dialog and wait for its closure
+        // Visa inloggningsdialogen och vänta på dess stängning
         stage.showAndWait();
 
-        // Check if the login was successful
+        // Kontrollerar om inloggningen var framgångsrik
         return loginSuccess;
     }
 
-    // Hämtar användar-ID från inloggningsdialogen
+    // Hämtar användar-ID från inloggningsdialog
     public String getUserID() {
         return userIDField.getText();
     }

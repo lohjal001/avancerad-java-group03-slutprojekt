@@ -14,15 +14,12 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class HolidayAPI {
-
     // API-nyckel och URL för att hämta helgdagar
     private static String API_KEY = "713f3086-0827-4f03-b2e3-a41e985b12c1";
     private static String API_URL = "https://holidayapi.com/v1/holidays?pretty&key=713f3086-0827-4f03-b2e3-a41e985b12c1&country=SE&language=sv&year=2022";
 
-    public static JsonArray holidaysArray;
-
     // Metoden för att hämta och bearbeta helgdagar
-    public static void holidays() {
+    public static void Holidays(String[] args) {
         // Skapar en JSON-objekt för att helgdagsinformation
         JSONObject obj = new JSONObject();
 
@@ -46,8 +43,22 @@ public class HolidayAPI {
             JsonObject holidaysOne = Json.parse(response.toString()).asObject();
 
             // Hämtar och skriver ut alla helgdagar som en array
-            holidaysArray = holidaysOne.get("holidays").asArray();
+            JsonArray holidaysArray = holidaysOne.get("holidays").asArray();
+            System.out.println(holidaysArray);
 
+            // TODO: 2023-12-20 Lägg till kod här för att matcha kalenderns datum med helgdagar (om det är relevant här)
+
+            // Hämtar och skriver ut information om den första helgdagen i arrayen
+            JsonObject holidaysString = holidaysArray.get(0).asObject();
+            System.out.println(holidaysString);
+
+            // Hämtar och skriver ut namnet på den första helgdagen
+            String holidayName = holidaysString.getString("name", "missing");
+            System.out.println(holidayName);
+
+            // Hämtar och skriver ut datumet för den första helgdagen
+            String holidayDate = holidaysString.getString("date", "missing");
+            System.out.println(holidayDate);
 
             // Stänger BufferedReader och kopplar från anslutningen
             reader.close();
