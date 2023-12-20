@@ -83,7 +83,7 @@ public class CustomCalendar {
         return events;
     }
 
-    // Hämtar händelser för ett specifik datum
+    // Hämtar händelser för ett specifikt datum
     List<Event> getEventNamesByDate(LocalDate date) {
         return events.stream().filter(e -> e.getDate().equals(date)).collect(Collectors.toList());
     }

@@ -4,15 +4,19 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
 
-public class LoginPage {
+public class LoginPage extends Node {
 
     private Stage stage;
     private TextField userIDField;
@@ -31,7 +35,6 @@ public class LoginPage {
         stage.setTitle("Login");
 
         GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(20, 20, 20, 20));
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
@@ -62,21 +65,50 @@ public class LoginPage {
             }
         });
 
-        // Lägger till element i rutnätet
+        // Lägger till element i rutnätet och sätter marginaler
+        GridPane.setMargin(userIDLabel, new Insets(0, 0, 0, 10));
+        GridPane.setMargin(userPasswordLabel, new Insets(0, 0, 0, 10));
+        GridPane.setMargin(userIDField, new Insets(0, 0, 0, 10));
+        GridPane.setMargin(userPasswordField, new Insets(0, 0, 0, 10));
+
         gridPane.add(userIDLabel, 0, 0);
         gridPane.add(userPasswordLabel, 0, 1);
         gridPane.add(userIDField, 1, 0);
         gridPane.add(userPasswordField, 1, 1);
-        gridPane.add(loginButton, 1, 2);
-        gridPane.add(resetButton, 2, 2);
+
+        // Lägger till knapparna i en HBox och sätter marginaler
+        HBox buttonBox = new HBox(5);
+        buttonBox.getChildren().addAll(loginButton, resetButton);
+        GridPane.setMargin(buttonBox, new Insets(0, 0, 0, 10));
+
+        gridPane.add(buttonBox, 1, 2);
         gridPane.add(messageLabel, 1, 3);
+
+        // Lägg till KeyEvent-lyssnare för Enter-tangenten på userIDField och userPasswordField
+        userIDField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    handleLogin();
+                }
+            }
+        });
+
+        userPasswordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    handleLogin();
+                }
+            }
+        });
 
         // Skapar en scen
         Scene scene = new Scene(gridPane, 400, 200);
         stage.setScene(scene);
     }
 
-    // Hanterar inloggningen när Login-knappen klickas
+    // Hanterar inloggningen när Login-knappen klickas eller Enter trycks
     private void handleLogin() {
         String userID = userIDField.getText();
         String password = userPasswordField.getText();
@@ -113,6 +145,6 @@ public class LoginPage {
 
     // Hämtar användar-ID från inloggningsdialogen
     public String getUserID() {
-        return null;
+        return userIDField.getText();
     }
 }

@@ -103,7 +103,7 @@ public class DayUI {
         // Knapp för att lägga till nytt evenemang
         Button btn = new Button();
         btn.setPrefWidth(170);
-        btn.setStyle("-fx-background-color: #6EB437; -fx-text-fill: #FFF");
+        btn.setStyle("-fx-background-color: #3758b4; -fx-text-fill: #FFF");
         btn.setPadding(new Insets(5, 5, 5, 5));
         btn.setText("Add Event");
 
@@ -120,7 +120,7 @@ public class DayUI {
         btnWrapper.setPadding(new Insets(10, 0, 0, 0));
         btnWrapper.setAlignment(Pos.CENTER);
 
-        // Lägger till element i dagens box.
+        // Lägger till element i dagens box
         dayBox.getChildren().addAll(header, ulScroll, textField, btnWrapper);
 
         stack.getChildren().add(r);
