@@ -19,7 +19,7 @@ public class CustomCalendar {
     private int weekOfYear;
     private int year;
 
-    // Sparar kalendern till en temporär fil
+    // Metoden för att spara kalendern till en temporär fil
     public void saveFile() {
         try {
             FileOutputStream fos = new FileOutputStream("calendar-data.tmp");
@@ -33,7 +33,7 @@ public class CustomCalendar {
         }
     }
 
-    // Läser in kalenderdatan från en fil
+    // Metoden för att läsa in kalenderdatan från en fil
     private void readFile() {
         try {
             FileInputStream fis = new FileInputStream("calendar-data.tmp");
@@ -54,53 +54,53 @@ public class CustomCalendar {
         readFile();
     }
 
-    // Hämtar en CustomDate för en specifik veckodag
+    // Metoden för att hämta en CustomDate för en specifik veckodag
     CustomDate getDayOfWeek(int dayIndex) { // dayIndex is between 1 and 7
         DayOfWeek currentDay = currentDate.getDayOfWeek();
         LocalDate newDate = currentDate;
         if (dayIndex > currentDay.getValue()) {
-            // Vi tittar in i framtiden
+            // Framåt i tiden
             newDate = currentDate.plusDays(dayIndex - currentDay.getValue());
         } else if (dayIndex < currentDay.getValue()) {
-            // Vi tittar in i det förflutna
+            // Bakåt i tiden
             newDate = currentDate.minusDays(currentDay.getValue() - dayIndex);
         }
         return new CustomDate(newDate);
     }
 
-    // Hämtar veckonummer
+    // Metoden för att hämta veckonummer
     int getWeekOfYear() {
         return weekOfYear;
     }
 
-    // Hämtar år
+    // Metoden för att hämta år
     int getYear() {
         return year;
     }
 
-    // Hämtar listan över händelser
+    // Metoden för att hämta listan över händelser
     ArrayList<Event> getEvents() {
         return events;
     }
 
-    // Hämtar händelser för ett specifikt datum
+    // Metoden för att hämta händelser för ett specifikt datum
     List<Event> getEventNamesByDate(LocalDate date) {
         return events.stream().filter(e -> e.getDate().equals(date)).collect(Collectors.toList());
     }
 
-    // Lägger till en händelse
+    // Metoden för att lägga till en händelse
     void addEvent(Event newEvent) {
         events.add(newEvent);
         saveFile();
     }
 
-    // Tar bort en händelse
+    // Metoden för att ta bort en händelse
     void removeEvent(Event oldEvent) {
         events.remove(oldEvent);
         saveFile();
     }
 
-    // Går till nästa vecka och uppdaterar veckonummer och år
+    // Metoden för att gå till nästa vecka och uppdatera veckonummer och år
     int nextWeek() {
         currentDate = currentDate.plusWeeks(1);
         weekOfYear = currentDate.get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
@@ -108,7 +108,7 @@ public class CustomCalendar {
         return weekOfYear;
     }
 
-    // Går till föregående vecka och uppdaterar veckonummer och år
+    // Metoden för att gå till föregående vecka och uppdatera veckonummer och år
     int prevWeek() {
         currentDate = currentDate.minusWeeks(1);
         weekOfYear = currentDate.get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
@@ -116,7 +116,7 @@ public class CustomCalendar {
         return weekOfYear;
     }
 
-    // Visar gränssnittet för kalendern
+    // Metoden för att visa gränssnittet för kalendern
     public void showCalendarInterface() {
     }
 }
