@@ -1,18 +1,16 @@
-
 package com.example.finalprojectavcjava;
 
-        import javafx.geometry.Insets;
-        import javafx.geometry.Pos;
-        import javafx.scene.control.*;
-        import javafx.scene.layout.*;
-        import javafx.scene.paint.Color;
-        import javafx.scene.shape.Rectangle;
-        import javafx.scene.text.Font;
-        import javafx.scene.text.Text;
-        import java.util.List;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import java.util.List;
 
 public class DayUI {
-    public String dateString;
     StackPane stack;
     private VBox ul;
 
@@ -123,8 +121,5 @@ public class DayUI {
 
         stack.getChildren().add(r);
         stack.getChildren().add(dayBox);
-    }
-
-    public void setTitle(String string) {
     }
 }

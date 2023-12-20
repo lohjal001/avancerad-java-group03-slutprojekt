@@ -30,6 +30,11 @@ public class CustomDate {
     // Konstruktorn för CustomDate
     public CustomDate(LocalDate date) {
         this.date = date;
+        updateDateInfo();
+    }
+
+    // Metod för att uppdatera informationen om datumet
+    private void updateDateInfo() {
         DayOfWeek currentDay = date.getDayOfWeek();
         weekday = makeFirstUpperCase(currentDay.name());
         dayAndMonth = String.format("%d%s of %s", date.getDayOfMonth(), getOrdinalNumber(date.getDayOfMonth()), makeFirstUpperCase(date.getMonth().name()));
@@ -39,5 +44,11 @@ public class CustomDate {
     boolean isToday() {
         LocalDate currDate = LocalDate.now();
         return currDate.equals(date);
+    }
+
+    // Metod för att sätta ett nytt datum och uppdatera informationen
+    public void setDate(LocalDate date) {
+        this.date = date;
+        updateDateInfo();
     }
 }

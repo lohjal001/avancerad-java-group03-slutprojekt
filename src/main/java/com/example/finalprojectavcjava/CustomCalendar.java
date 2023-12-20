@@ -112,5 +112,10 @@ public class CustomCalendar {
 
     public void showCalendarInterface() {
     }
+
+    public CustomDate getCustomDate(int i) {
+
+        return null;
+    }
 }
 
