@@ -16,7 +16,7 @@ import java.net.URL;
 public class HolidayAPI {
     private static String API_KEY = "713f3086-0827-4f03-b2e3-a41e985b12c1";
 
-    private static String API_URL = "https://holidayapi.com/v1/holidays?pretty&key=713f3086-0827-4f03-b2e3-a41e985b12c1&country=SE&year=2022";
+    private static String API_URL = "https://holidayapi.com/v1/holidays?pretty&key=713f3086-0827-4f03-b2e3-a41e985b12c1&country=SE&language=sv&year=2022";
 
     public static void Holidays(String[] args) {
         JSONObject obj = new JSONObject();
