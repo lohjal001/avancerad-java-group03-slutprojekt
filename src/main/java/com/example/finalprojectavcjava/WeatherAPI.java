@@ -20,7 +20,7 @@ import java.net.URL;
 public class WeatherAPI {
 
     private static final String API_KEY = "39a9fa293da14c18d62e493441646e01";
-    private static final String API_URL = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric";
+    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=55.61&lon=13.00&appid=39a9fa293da14c18d62e493441646e01&units=metric";
 
     public String iconID;
 
@@ -39,7 +39,7 @@ public class WeatherAPI {
     }
 
 
-    public void main(String[] args) {
+    public void Weather(String[] args) {
         String city = "Malmö";
         JSONObject obj = new JSONObject();
 
