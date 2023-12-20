@@ -18,6 +18,8 @@ public class HolidayAPI {
 
     private static String API_URL = "https://holidayapi.com/v1/holidays?pretty&key=713f3086-0827-4f03-b2e3-a41e985b12c1&country=SE&language=sv&year=2022";
 
+    public static JsonArray holidaysArray;
+
     public static void holidays() {
         JSONObject obj = new JSONObject();
 
@@ -41,7 +43,7 @@ public class HolidayAPI {
 
             //stoppar in alla helgdagar i en array
 
-            JsonArray holidaysArray = holidaysOne.get("holidays").asArray();
+            holidaysArray = holidaysOne.get("holidays").asArray();
 
 
             /*

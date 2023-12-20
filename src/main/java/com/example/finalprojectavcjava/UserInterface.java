@@ -39,7 +39,7 @@ public class UserInterface {
             for (JsonValue jv: holidaysArray) {
                 JsonObject jo = jv.asObject();
                 String redDate = jo.getString("date", "missing");
-                if (redDate.equals(dayui.dateStrimg)){
+                if (redDate.equals(dayui.dateString)){
                     dayui.setTitle(jo.getString("name", "missing"));
 
                 }
