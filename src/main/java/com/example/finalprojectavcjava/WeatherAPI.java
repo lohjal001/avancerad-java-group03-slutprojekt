@@ -4,9 +4,6 @@ import cn.hutool.json.JSONObject;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,20 +17,20 @@ import java.net.URL;
 public class WeatherAPI {
 
     private static final String API_KEY = "39a9fa293da14c18d62e493441646e01";
-    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=55.61&lon=13.00&appid=39a9fa293da14c18d62e493441646e01&units=metric";
+    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?lat=55.61&lon=13.00&&units=metric&lang=svappid=39a9fa293da14c18d62e493441646e01";
 
-    public String iconID;
+    public static String iconID;
 
-    public String getIconID() {
+    public static String getIconID() {
         return iconID;
     }
 
-    public String temp;
+    public static String temp;
     public String getTemp() {
         return temp;
     }
 
-    public String weatherDescription;
+    public static String weatherDescription;
     public String getWeatherDescription() {
         return weatherDescription;
     }
@@ -63,35 +60,33 @@ public class WeatherAPI {
             JsonObject allJsonData = Json.parse(response.toString()).asObject();
             System.out.println(allJsonData);
 
-
+            //första väderdatan i en array
             JsonArray weatherData = allJsonData.get("weather").asArray();
             System.out.println(weatherData);
 
             JsonObject mainObject = allJsonData.get("main").asObject();
 
+            //plockar ut första objectet ur arrayen
             JsonObject jo2 = weatherData.get(0).asObject();
             System.out.println(jo2);
 
+            //tar fram temperaturen som en double
             double temp = mainObject.getDouble("temp", Double.NaN);
             System.out.println(temp);
 
+            //tar fram beskrivningen av vädret som en string
             String weatherDescription = jo2.getString("description", "missing");
             System.out.println(weatherDescription);
 
+            //plockar fram ID till en image som symboliserar vädret för att hämta bilden med hjälp av URL
             iconID = jo2.getString("icon", "missing");
             System.out.println(iconID);
 
+            //URL för att hämta bilden som symboliserar vädret
             String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
 
 
-            TextField weatherTextField = new TextField();
-            weatherTextField.setText(weatherDescription + temp);
 
-            // load the image
-            Image image = new Image("http://openweathermap.org/img/w/" + iconID + ".png");
-
-            ImageView weatherImageView = new ImageView();
-            weatherImageView.setImage(image);
 
         } catch (ProtocolException ex) {
             throw new RuntimeException(ex);
