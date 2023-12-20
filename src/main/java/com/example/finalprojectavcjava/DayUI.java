@@ -1,6 +1,7 @@
 
 package com.example.finalprojectavcjava;
 
+
         import javafx.geometry.Insets;
         import javafx.geometry.Pos;
         import javafx.scene.control.*;
@@ -10,8 +11,12 @@ package com.example.finalprojectavcjava;
         import javafx.scene.text.Font;
         import javafx.scene.text.Text;
         import java.util.List;
+        import java.time.format.DateTimeFormatter;
 
 public class DayUI {
+
+    public static Text title;
+    private static Text holidayText;
     public String dateString;
     StackPane stack;
     private VBox ul;
@@ -53,6 +58,9 @@ public class DayUI {
         dayBox.maxWidth(200);
         dayBox.setPadding(new Insets(10, 5, 10, 5));
 
+        dateString= currentDate.date.getYear()-1+ DateTimeFormatter.ofPattern("-MM-dd").format(currentDate.date);
+        System.out.println(dateString);
+
         // Uppdaterar bakgrundsfärg beroende på om det är dagens datum
         if (currentDate.isToday()) {
             dayBox.setStyle("-fx-background-color: bcedc4;");
@@ -80,7 +88,10 @@ public class DayUI {
         subtitle.setText(currentDate.dayAndMonth);
         subtitle.setFont(Font.font("Segone UI", 17));
 
-        header.getChildren().addAll(title, subtitle);
+        holidayText = new Text();
+        holidayText.setFont(Font.font("Segone UI", 12));
+
+        header.getChildren().addAll(title, holidayText, subtitle);
 
         // Listan med evenemang
         ul = new VBox(10);
@@ -125,6 +136,10 @@ public class DayUI {
         stack.getChildren().add(dayBox);
     }
 
-    public void setTitle(String string) {
+
+    public void setTitle(String s){
+        holidayText.setText(s);
     }
 }
+
+
