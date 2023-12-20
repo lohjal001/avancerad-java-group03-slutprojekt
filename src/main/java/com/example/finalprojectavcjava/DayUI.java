@@ -12,10 +12,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DayUI {
+    public static Text title;
+    private static Text holidayText;
     StackPane stack;
+    public String dateStrimg;
+
     private VBox ul;
 
     // Metoden för att uppdatera evenemangslistan
@@ -40,10 +45,11 @@ public class DayUI {
                 calendar.removeEvent(event);
                 setEvents(calendar.getEventNamesByDate(currentDate.date), calendar, currentDate); // Uppdatera listan
             });
-
             li.getChildren().addAll(txt, r, rmBtn);
             ul.getChildren().add(li);
+
         }
+
     }
 
     // Konstruktorn för DayUI
@@ -54,6 +60,9 @@ public class DayUI {
         dayBox.minHeight(500.0);
         dayBox.maxWidth(200);
         dayBox.setPadding(new Insets(10, 5, 10, 5));
+
+        dateStrimg= currentDate.date.getYear()-1+DateTimeFormatter.ofPattern("-MM-dd").format(currentDate.date);
+        System.out.println(dateStrimg);
 
         // Uppdaterar bakgrundsfärg beroende på om det är dagens datum
         if (currentDate.isToday()) {
@@ -74,15 +83,19 @@ public class DayUI {
         header.setPadding(new Insets(0, 0, 20, 0));
 
         // Titel och undertitel
-        Text title = new Text();
+        title = new Text();
         title.setText(currentDate.weekday);
-        title.setFont(Font.font("Segone UI", 22));
+        title.setFont(Font.font("Segone UI", 20));
+
+        holidayText = new Text();
+        holidayText.setFont(Font.font("Segone UI", 12));
+
 
         Text subtitle = new Text();
         subtitle.setText(currentDate.dayAndMonth);
         subtitle.setFont(Font.font("Segone UI", 17));
 
-        header.getChildren().addAll(title, subtitle);
+        header.getChildren().addAll(title, holidayText, subtitle);
 
         // Listan med evenemang
         ul = new VBox(10);
@@ -125,5 +138,9 @@ public class DayUI {
 
         stack.getChildren().add(r);
         stack.getChildren().add(dayBox);
+    }
+
+    public void setTitle(String s){
+        holidayText.setText(s);
     }
 }
