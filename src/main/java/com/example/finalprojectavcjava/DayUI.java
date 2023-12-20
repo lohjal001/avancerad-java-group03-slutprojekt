@@ -1,25 +1,19 @@
+
 package com.example.finalprojectavcjava;
 
-
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-
-import java.time.DayOfWeek;
-import java.util.List;
+        import javafx.geometry.Insets;
+        import javafx.geometry.Pos;
+        import javafx.scene.control.*;
+        import javafx.scene.layout.*;
+        import javafx.scene.paint.Color;
+        import javafx.scene.shape.Rectangle;
+        import javafx.scene.text.Font;
+        import javafx.scene.text.Text;
+        import java.util.List;
 
 public class DayUI {
-    public static Text title;
-    private static Text holidayText;
-    StackPane stack;
     public String dateString;
+    StackPane stack;
     private VBox ul;
 
     // Metoden för att uppdatera evenemangslistan
@@ -59,9 +53,6 @@ public class DayUI {
         dayBox.maxWidth(200);
         dayBox.setPadding(new Insets(10, 5, 10, 5));
 
-        dateString= currentDate.date.getYear()-1+ DateTimeFormatter.ofPattern("-MM-dd").format(currentDate.date);
-        System.out.println(dateString);
-
         // Uppdaterar bakgrundsfärg beroende på om det är dagens datum
         if (currentDate.isToday()) {
             dayBox.setStyle("-fx-background-color: bcedc4;");
@@ -85,14 +76,11 @@ public class DayUI {
         title.setText(currentDate.weekday);
         title.setFont(Font.font("Segone UI", 22));
 
-        holidayText = new Text();
-        holidayText.setFont(Font.font("Segone UI", 12));
-
         Text subtitle = new Text();
         subtitle.setText(currentDate.dayAndMonth);
         subtitle.setFont(Font.font("Segone UI", 17));
 
-        header.getChildren().addAll(title, holidayText, subtitle);
+        header.getChildren().addAll(title, subtitle);
 
         // Listan med evenemang
         ul = new VBox(10);
@@ -137,7 +125,6 @@ public class DayUI {
         stack.getChildren().add(dayBox);
     }
 
-    public void setTitle(String s){
-        holidayText.setText(s);
+    public void setTitle(String string) {
     }
 }
