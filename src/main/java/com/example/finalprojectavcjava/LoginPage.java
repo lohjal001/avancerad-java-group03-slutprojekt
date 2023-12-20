@@ -35,20 +35,20 @@ public class LoginPage extends Stage {
 
         // Skapar ett nytt scenobjekt och konfigurerar layouten med ett rutnät
         stage = new Stage();
-        stage.setTitle("Logga in");
+        stage.setTitle("Log in");
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
         // Skapar och konfigurerar användargränssnittselement
-        userIDLabel = new Label("Användarnamn:");
-        userPasswordLabel = new Label("Lösenord:");
+        userIDLabel = new Label("Username:");
+        userPasswordLabel = new Label("Password:");
         messageLabel = new Label();
 
         userIDField = new TextField();
         userPasswordField = new PasswordField();
 
-        Button loginButton = new Button("Logga in");
+        Button loginButton = new Button("Log in");
         Button resetButton = new Button("Reset");
 
         // Anger åtgärder för knapparna när de klickas
