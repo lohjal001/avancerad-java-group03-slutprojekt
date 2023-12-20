@@ -18,7 +18,7 @@ public class HolidayAPI {
 
     private static String API_URL = "https://holidayapi.com/v1/holidays?pretty&key=713f3086-0827-4f03-b2e3-a41e985b12c1&country=SE&language=sv&year=2022";
 
-    public static void Holidays(String[] args) {
+    public static void holidays() {
         JSONObject obj = new JSONObject();
 
 
@@ -40,11 +40,11 @@ public class HolidayAPI {
 
 
             //stoppar in alla helgdagar i en array
+
             JsonArray holidaysArray = holidaysOne.get("holidays").asArray();
-            System.out.println(holidaysArray);
 
-            // TODO: 2023-12-20 stoppa in if-sats som kollar om kalenderns datum matchar datum i arrayen? (kanske inte här?)
 
+            /*
             //plockar ut första helgdagen
             JsonObject holidaysString = holidaysArray.get(0).asObject();
             System.out.println(holidaysString);
@@ -57,7 +57,7 @@ public class HolidayAPI {
             String holidayDate= holidaysString.getString("date", "missing");
             System.out.println(holidayDate);
 
-
+             */
 
 
             reader.close();
