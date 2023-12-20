@@ -111,26 +111,12 @@ public class UserInterface {
             currentWeek.setText("V. " + calendar.nextWeek());
             calendarTitle.setText("Kalender " + calendar.getYear());
             renderDays(calendar);
+
         });
 
-        // Textfält för att ange evenemangstext
-        TextField eventTextField = new TextField();
-        eventTextField.setPromptText("Ny händelse");
-
-        // Knapp för att lägga till evenemang
-        Button addEventBtn = new Button("Ny händelse");
-        addEventBtn.setOnAction(event -> {
-            String eventText = eventTextField.getText();
-            if (!eventText.isEmpty()) {
-                // Lägg till evenemang och uppdatera gränssnittet
-                calendar.addEvent(new Event(calendar.currentDate, eventText));
-                eventTextField.clear();
-                renderDays(calendar);
-            }
-        });
 
         // Lägg till navigationskomponenter i HBox
-        nav.getChildren().addAll(prevWeekBtn, currentWeek, nextWeekBtn, eventTextField, addEventBtn);
+        nav.getChildren().addAll(prevWeekBtn, currentWeek, nextWeekBtn);
 
         // Lägg till navigationskomponenterna i BorderPane
         body.setBottom(nav);
