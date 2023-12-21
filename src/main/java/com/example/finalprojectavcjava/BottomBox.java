@@ -31,3 +31,4 @@ public class BottomBox extends HBox {
         getChildren().addAll(textView, imageView);
     }
 }
+

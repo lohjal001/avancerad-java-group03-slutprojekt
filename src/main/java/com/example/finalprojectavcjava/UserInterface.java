@@ -3,9 +3,8 @@ package com.example.finalprojectavcjava;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -38,7 +37,7 @@ public class UserInterface {
     UserInterface(CustomCalendar calendar) {
 
         // Skapar en rubrik för kalendern
-        Text calendarTitle = new Text("Kalender " + calendar.getYear());
+        Text calendarTitle = new Text("Calender " + calendar.getYear());
         calendarTitle.setFont(Font.font("Roboto UI", 27));
 
         // Skapar en HBox för rubriken och centrerar den
@@ -50,10 +49,13 @@ public class UserInterface {
         body = new BorderPane();
         scrollBody = new ScrollPane(body);
         scrollBody.setFitToWidth(true);
-        scrollBody.setStyle("-fx-background-color: ddd;");
+
+        // Anropa setBackgroundColor för att sätta bakgrundsfärg
+        setBackgroundColor(body, Color.web("#61A3BA"));
 
         // Sätter in padding för BorderPane
         body.setPadding(new Insets(5, 0, 5, 0));
+
 
         // Lägger till rubriken överst i BorderPane
         body.setTop(header);
@@ -86,25 +88,27 @@ public class UserInterface {
         Button prevWeekBtn = new Button("<");
         prevWeekBtn.setOnAction(e -> {
             currentWeek.setText("V. " + calendar.prevWeek());
-            calendarTitle.setText("Kalender " + calendar.getYear());
+            calendarTitle.setText("Calendar " + calendar.getYear());
             renderDays(calendar);
         });
 
         Button nextWeekBtn = new Button(">");
         nextWeekBtn.setOnAction(e -> {
             currentWeek.setText("V. " + calendar.nextWeek());
-            calendarTitle.setText("Kalender " + calendar.getYear());
+            calendarTitle.setText("Calendar " + calendar.getYear());
             renderDays(calendar);
         });
 
         // Textfält för att ange evenemangstext
         TextField eventTextField = new TextField();
-        eventTextField.setPromptText("Ny händelse");
+        eventTextField.setPromptText("New event");
 
         // Knapp för att lägga till evenemang
-        Button addEventBtn = new Button("Ny händelse");
+        Button addEventBtn = new Button("New event");
+        addEventBtn.setStyle("-fx-background-color: #3559E0; -fx-text-fill: #ffffff;");
         addEventBtn.setOnAction(event -> {
             String eventText = eventTextField.getText();
+
             if (!eventText.isEmpty()) {
                 // Lägg till evenemang och uppdatera gränssnittet
                 calendar.addEvent(new Event(calendar.currentDate, eventText));
@@ -120,4 +124,10 @@ public class UserInterface {
         body.setBottom(nav);
     }
 
+    // Funktion för att ställa in bakgrundsfärg för BorderPane
+    private void setBackgroundColor(BorderPane pane, Color color) {
+        BackgroundFill backgroundFill = new BackgroundFill(color, null, null);
+        Background background = new Background(backgroundFill);
+        pane.setBackground(background);
+    }
 }

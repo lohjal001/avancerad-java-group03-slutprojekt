@@ -53,7 +53,7 @@ public class DayUI {
 
         // Uppdaterar bakgrundsfärg beroende på om det är dagens datum
         if (currentDate.isToday()) {
-            dayBox.setStyle("-fx-background-color: bcedc4;");
+            dayBox.setStyle("-fx-background-color: #FFB534;");
         } else {
             dayBox.setStyle("-fx-background-color: eee;");
         }
