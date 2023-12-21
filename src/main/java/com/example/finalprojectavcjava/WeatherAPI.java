@@ -1,6 +1,5 @@
 package com.example.finalprojectavcjava;
 
-import cn.hutool.json.JSONObject;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
@@ -38,8 +37,6 @@ public class WeatherAPI {
 
     public static void weather() {
         String city = "Malmö";
-        JSONObject obj = new JSONObject();
-
 
         try {
             URL url = new URL(String.format(API_URL, city, API_KEY));
