@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-
 public class WeatherAPI {
 
     private static final String API_KEY = "39a9fa293da14c18d62e493441646e01";
@@ -33,7 +32,6 @@ public class WeatherAPI {
     public String getWeatherDescription() {
         return weatherDescription;
     }
-
 
     public static void weather() {
         String city = "Malmö";
@@ -79,7 +77,6 @@ public class WeatherAPI {
             String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
 
 
-
         } catch (ProtocolException ex) {
             throw new RuntimeException(ex);
         } catch (MalformedURLException ex) {
@@ -90,13 +87,10 @@ public class WeatherAPI {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
-
     }
 
     private static String parseWeatherData(String jsonData) {
         System.out.println(jsonData);
-
 
         return jsonData;
     }

@@ -85,8 +85,6 @@ public class CustomCalendar {
         return events.stream().filter(e-> e.getDate().equals(date)).collect(Collectors.toList());
     }
 
-
-
     void addEvent(Event newEvent) {
         events.add(newEvent);
         saveFile();

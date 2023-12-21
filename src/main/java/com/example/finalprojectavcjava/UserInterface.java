@@ -46,33 +46,35 @@ public class UserInterface {
 
             }
         }
-
-
     }
 
     // Konstruktorn för UserInterface
     UserInterface(CustomCalendar calendar) {
 
+        // TEMA: https://colorhunt.co/palette/0926351b42425c83749ec8b9
+        String headerBackgroundColor = "#5c8374";  // Grågrön
+        String bodyBackgroundColor = "#9ec8b9";    // Ljusgrön
+
         // Skapar en rubrik för kalendern
         Text calendarTitle = new Text("Kalender " + calendar.getYear());
         calendarTitle.setFont(Font.font("DejaVu Sans", 27));
-        calendarTitle.setStyle("-fx-background-color: F1EAFF; -fx-text-fill: 392467");
+        calendarTitle.setStyle("-fx-background-color: #1B4242;");
 
         // Skapar en HBox för rubriken och centrerar den
         header = new HBox(calendarTitle);
         header.setAlignment(Pos.CENTER);
         header.setPadding(new Insets(10, 10, 10, 10));
-        header.setStyle("-fx-background-color: FDF7E4;");
+        header.setStyle("-fx-background-color: " + headerBackgroundColor + ";");
 
         // Skapar en BorderPane för hela gränssnittet och en ScrollPane för möjliggöra scrollande
         body = new BorderPane();
         scrollBody = new ScrollPane(body);
         scrollBody.setFitToWidth(true);
-        scrollBody.setStyle("-fx-background-color: FFBB5C;");
+        scrollBody.setStyle("-fx-background-color: " + bodyBackgroundColor + ";");
 
         // Sätter in padding för BorderPane
         body.setPadding(new Insets(5, 0, 5, 0));
-        body.setStyle("-fx-background-color: FDF7E4;");
+        body.setStyle("-fx-background-color: " + bodyBackgroundColor + ";");
 
         // Lägger till rubriken överst i BorderPane
         body.setTop(header);
@@ -83,8 +85,7 @@ public class UserInterface {
         main.setVgap(10);
         main.setHgap(10);
         main.setPrefWrapLength(170);
-        body.setStyle("-fx-background-color: FDF7E4;");
-
+        main.setStyle("-fx-background-color: " + bodyBackgroundColor + ";");
 
         // Renderar dagarna baserat på den aktuella kalendern
         renderDays(calendar);
@@ -120,9 +121,7 @@ public class UserInterface {
             renderDays(calendar);
             calendarTitle.setFont(Font.font("DejaVu Sans", 35));
             currentWeek.setFont(Font.font("DejaVu Sans", 22));
-
         });
-
 
         // Lägg till navigationskomponenter i HBox
         nav.getChildren().addAll(prevWeekBtn, currentWeek, nextWeekBtn);
@@ -130,5 +129,4 @@ public class UserInterface {
         // Lägg till navigationskomponenterna i BorderPane
         body.setBottom(nav);
     }
-
 }
