@@ -19,7 +19,7 @@ public class BottomBox extends HBox {
 
         // TextField för att visa väderbeskrivning och temperatur från WeatherAPI
         Label weatherTextLabel = new Label();
-        weatherTextLabel.setText(weatherDescription + temp);
+        weatherTextLabel.setText("\r\n" +weatherDescription + "\r\n" + temp);
         weatherTextLabel.setFont(Font.font("Segone UI", 20));
 
 
@@ -29,7 +29,6 @@ public class BottomBox extends HBox {
         weatherImageView.setFitHeight(100);
         weatherImageView.setFitWidth(100);
         weatherImageView.setImage(iconImage);
-
 
         // Lägger till TextView och ImageView i HBox
         getChildren().addAll(textView, weatherTextLabel, weatherImageView);

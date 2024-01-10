@@ -62,19 +62,24 @@ public class WeatherAPI {
             //plockar ut första objectet ur arrayen
             JsonObject jo2 = weatherData.get(0).asObject();
 
+            //tar fram beskrivningen av vädret som en string
+            String weatherDescription = jo2.getString("description", "missing");
+            System.out.println(weatherDescription);
+
+
             //tar fram temperaturen som en double
             double temp = mainObject.getDouble("temp", Double.NaN);
             System.out.println(temp);
 
-            //tar fram beskrivningen av vädret som en string
-            String weatherDescription = jo2.getString("description", "missing");
-            System.out.println(weatherDescription);
+            WeatherAPI.weatherDescription = String.valueOf(weatherDescription);
+            WeatherAPI.temp = String.valueOf(temp);
+
 
             //plockar fram ID till en image som symboliserar vädret för att hämta bilden med hjälp av URL
             iconID = jo2.getString("icon", "missing");
 
             //URL för att hämta bilden som symboliserar vädret
-            String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
+            //String iconUrl = "http://openweathermap.org/img/w/" + iconID + ".png";
 
 
         } catch (ProtocolException ex) {
