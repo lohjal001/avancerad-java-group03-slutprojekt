@@ -5,18 +5,19 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import static com.example.finalprojectavcjava.HolidayAPI.holidays;
 import static com.example.finalprojectavcjava.WeatherAPI.weather;
-
 import java.util.HashMap;
+import java.util.Optional;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
     @Override
@@ -62,27 +63,32 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } else {
-            showLoginPrompt();
-            openLoginDialog(primaryStage);
+            showLoginPrompt(primaryStage);
         }
     }
 
     private void handleLogout(Stage primaryStage) {
-        showLogoutPrompt();
+        showLogoutPrompt(primaryStage);
         primaryStage.close();
         openLoginDialog(primaryStage);
     }
 
-    private void showLoginPrompt() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showLoginPrompt(Stage primaryStage) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Login Required");
         alert.setHeaderText("You need to log in to access the calendar");
         alert.setContentText("Please log in to continue.");
 
-        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            openLoginDialog(primaryStage);
+        } else {
+            // Vid cancel-knappen stängs programmet
+            primaryStage.close();
+        }
     }
 
-    private void showLogoutPrompt() {
+    private void showLogoutPrompt(Stage primaryStage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Logout Successful");
         alert.setHeaderText("You have been successfully logged out");
